@@ -4,6 +4,9 @@ title: Home Lab Kubernetes
 description: GitOps-managed K3s cluster with self-hosted applications
 ---
 
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:'dark'});</script>
+
 # Home Lab Kubernetes
 
 **GitOps-managed K3s cluster** running on Talos-based nodes with Longhorn storage.
@@ -12,16 +15,45 @@ This site showcases a subset of my home lab infrastructure — production-ready 
 
 ---
 
-## Quick Start
+## ArgoCD CI/CD Pipeline
 
+All deployments are managed via **ArgoCD** — GitOps-style continuous delivery.
+
+### Pipeline Flow
+
+```
+Developer → Git Commit → ArgoCD Detects → Sync → K3s Cluster
+```
+
+### 1. Commit Changes
 ```bash
-# Clone the repo (private access required)
-git clone git@github.com:mentholmike/kube.git
-cd kube
+# Edit manifests
+vim Apps/pairdrop/base/deployment.yaml
 
-# Deploy an app
+# Commit & push
+git add -A && git commit -m "Update PairDrop config"
+git push origin main
+```
+
+### 2. ArgoCD Auto-Sync
+- Polls repo every 3 minutes
+- Detects changes in `main` branch
+- Applies manifests: `kubectl apply -k Apps/pairdrop/base/`
+- Rolls out deployment
+
+### 3. Verify Deploy
+```bash
+# Watch rollout
+kubectl rollout status deployment/pairdrop -n pairdrop-space
+
+# Or via ArgoCD UI
+https://argocd.k3s.wagmilabs.fun
+```
+
+### Manual Deploy (Testing)
+```bash
 kubectl apply -k Apps/pairdrop/base/
-kubectl apply -k Apps/minecraft/base/
+kubectl rollout restart deployment/pairdrop -n pairdrop-space
 ```
 
 ---
@@ -38,7 +70,7 @@ kubectl apply -k Apps/minecraft/base/
 
 ---
 
-## Network Topology
+## Cluster Architecture
 
 ```mermaid
 flowchart TD
