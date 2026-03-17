@@ -69,9 +69,9 @@ flowchart TD
 
 | Hostname | Role | Notes |
 |----------|------|-------|
-| `talos-ckf-wwf` | Control plane | K3s server |
-| `talos-t9f-ihr` | Worker | OpenClaw pinned here (has local storage) |
-| `talos-326-d4w` | Worker | General workloads |
+| `talos-controlplane-node` | Control plane | K3s server |
+| `talos-worker-node` | Worker | OpenClaw pinned here (has local storage) |
+| `talos-worker-node` | Worker | General workloads |
 
 ---
 
