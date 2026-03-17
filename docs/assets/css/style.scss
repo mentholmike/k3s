@@ -1,0 +1,116 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+// Dark theme colors (jekyllrb.com style)
+$body-background: #1e1e1e;
+$body-text-color: #e0e0e0;
+$link-color: #5db0ff;
+$code-background: #2d2d2d;
+$border-color: #404040;
+$sidebar-background: #252525;
+$sidebar-text-color: #e0e0e0;
+
+body {
+  background: $body-background;
+  color: $body-text-color;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: $link-color;
+  &:hover {
+    color: #7ec8ff;
+  }
+}
+
+.wrapper {
+  max-width: 960px;
+}
+
+header {
+  background: $sidebar-background;
+  border-right: 1px solid $border-color;
+  
+  h1 {
+    color: $sidebar-text-color;
+  }
+  
+  a {
+    color: $link-color;
+  }
+}
+
+main {
+  background: $body-background;
+}
+
+.highlight {
+  background: $code-background;
+  border: 1px solid $border-color;
+  
+  .c { color: #75715e; } // comment
+  .k { color: #f92672; } // keyword
+  .o { color: #f8f8f2; } // operator
+  .cm { color: #75715e; } // comment.multiline
+  .cp { color: #75715e; } // comment.preproc
+  .c1 { color: #75715e; } // comment.single
+  .cs { color: #75715e; } // comment.special
+  .gd { color: #f92672; } // generic.deleted
+  .ge { font-style: italic; } // generic.emph
+  .gi { color: #a6e22e; } // generic.inserted
+  .gs { font-weight: bold; } // generic.strong
+  .gu { color: #75715e; } // generic.subheading
+  .kc { color: #f92672; } // keyword.constant
+  .kd { color: #f92672; } // keyword.declaration
+  .kn { color: #f92672; } // keyword.namespace
+  .kp { color: #f92672; } // keyword.pseudo
+  .kr { color: #f92672; } // keyword.reserved
+  .kt { color: #66d9ef; } // keyword.type
+  .m { color: #ae81ff; } // literal.number
+  .s { color: #e6db74; } // literal.string
+  .na { color: #a6e22e; } // name.attribute
+  .nb { color: #f8f8f2; } // name.builtin
+  .nc { color: #a6e22e; } // name.class
+  .no { color: #66d9ef; } // name.constant
+  .nd { color: #a6e22e; } // name.decorator
+  .ni { color: #f8f8f2; } // name.entity
+  .ne { color: #a6e22e; } // name.exception
+  .nf { color: #a6e22e; } // name.function
+  .nl { color: #f8f8f2; } // name.label
+  .nn { color: #f8f8f2; } // name.namespace
+  .nx { color: #a6e22e; } // name.other
+  .py { color: #f8f8f2; } // name.property
+  .nt { color: #f92672; } // name.tag
+  .nv { color: #f8f8f2; } // name.variable
+  .ow { color: #f92672; } // operator.word
+  .w { color: #f8f8f2; } // text.whitespace
+}
+
+table {
+  border: 1px solid $border-color;
+  
+  th {
+    background: $sidebar-background;
+    border: 1px solid $border-color;
+    color: $sidebar-text-color;
+  }
+  
+  td {
+    border: 1px solid $border-color;
+    background: $body-background;
+  }
+}
+
+blockquote {
+  border-left: 4px solid $link-color;
+  background: $sidebar-background;
+  padding: 10px 20px;
+}
+
+code {
+  background: $code-background;
+  border: 1px solid $border-color;
+  color: #e0e0e0;
+}

@@ -109,7 +109,7 @@ flowchart TD
 
 ## Contact
 
-**Repo:** [github.com/mentholmike/kube](https://github.com/mentholmike/kube)  
-**Domain:** [kube.yourdomain.com](https://kube.yourdomain.com)
+**Repo:** [github.com/mentholmike/k3s](https://github.com/mentholmike/k3s)  
+**Domain:** [k3s.wagmilabs.fun](https://k3s.wagmilabs.fun)
 
 *This is a personal home lab — not for production use without review.*

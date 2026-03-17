@@ -1,6 +1,7 @@
-# Kube — Home Network Kubernetes Manifests
+# K3s — Home Lab Kubernetes Portfolio
 
-GitOps-ready Kubernetes manifests for my home lab, managed via **ArgoCD**.
+
+GitOps-managed K3s cluster with self-hosted applications. This portfolio showcases production-ready manifests for common workloads.
 
 ---
 
@@ -83,25 +84,17 @@ flowchart TD
 3. **Sync** — Applies manifests to the cluster (`kubectl apply -k <app>/base`)
 4. **Deploy** — Pods roll out with the new configuration
 
-### App Structure
+### Featured Apps (Public)
 
 ```
 Apps/
-├── openclaw/       # AI gateway (Discord, Telegram, etc.)
-├── scanopy/        # Home network daemon
-├── pairdrop/       # Local file sharing
-├── arr-config/     # Plex/Arr suite config storage
-├── radarr/         # Movie automation
-├── sonarr/         # TV automation
-├── prowlarr/       # Tracker indexer
-├── jellyseerr/     # Content request UI
-├── nginx-proxy-manager/  # Reverse proxy + SSL
-├── gluetun/        # VPN tunnel for containers
-├── minecraft/      # Game server
-├── retroarch/      # Retro gaming
-├── filezilla/      # FTP server
-└── windows/        # Windows VM
+├── longhorn/       # Distributed block storage (3 replicas)
+├── windows/        # Windows 11 VM via KubeVirt
+├── pairdrop/       # Local file sharing (AirDrop alternative)
+└── minecraft/      # Minecraft server with persistent storage
 ```
+
+Full cluster includes additional private apps (arr suite, gluetun, etc.) — not shown in this public portfolio.
 
 Each app follows the **Kustomize** pattern:
 ```
@@ -199,7 +192,7 @@ For production, consider **SealedSecrets** or **External Secrets Operator** to e
 
 This repo has a **GitHub Pages** site showcasing select apps:
 
-**https://mentholmike.github.io/kube/**
+**https://k3s.wagmilabs.fun**
 
 Featured: Longhorn, Windows VM, PairDrop, Minecraft (clean, interview-ready docs).
 
