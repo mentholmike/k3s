@@ -26,9 +26,9 @@ flowchart TD
   end
   
   subgraph sub_k3s["K3s Cluster"]
-    n_talos1["talos-ckf-wwf"]
-    n_talos2["talos-t9f-ihr"]
-    n_talos3["talos-326-d4w"]
+    n_talos1["talos-control-plane"]
+    n_talos2["talos-worker"]
+    n_talos3["talos-worker"]
     n_talos3 --> n_talos1
     n_talos1 --> n_talos2
   end
