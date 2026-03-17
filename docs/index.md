@@ -76,8 +76,8 @@ kubectl rollout restart deployment/pairdrop -n pairdrop-space
 │                    K3s Cluster                           │
 │                                                         │
 │  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐ │
-│  │ talos-ckf   │    │ talos-t9f   │    │ talos-326   │ │
-│  │ (Control)   │───▶│ (Worker)    │───▶│ (Worker)    │ │
+│  │   Control   │    │   Worker    │    │   Worker    │ │
+│  │   Node      │───▶│   Node      │───▶│   Node      │ │
 │  │             │    │             │    │             │ │
 │  │  Longhorn   │    │  Longhorn   │    │  Longhorn   │ │
 │  │  Replica 1  │    │  Replica 2  │    │  Replica 3  │ │
@@ -88,9 +88,9 @@ kubectl rollout restart deployment/pairdrop -n pairdrop-space
 ### Storage: Longhorn (3 Replicas)
 
 Each PVC is replicated across all 3 nodes:
-- **Replica 1** → talos-ckf-wwf (control plane)
-- **Replica 2** → talos-t9f-ihr (worker, OpenClaw pinned)
-- **Replica 3** → talos-326-d4w (worker, general workloads)
+- **Replica 1** → Control node
+- **Replica 2** → Worker node 1
+- **Replica 3** → Worker node 2
 
 If any node fails, data survives and pods reschedule automatically.
 
