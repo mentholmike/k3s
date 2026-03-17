@@ -4,9 +4,6 @@ title: Home Lab Kubernetes
 description: GitOps-managed K3s cluster with self-hosted applications
 ---
 
-<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-<script>mermaid.initialize({startOnLoad:true,theme:'dark'});</script>
-
 # Home Lab Kubernetes
 
 **GitOps-managed K3s cluster** running on Talos-based nodes with Longhorn storage.
@@ -72,24 +69,30 @@ kubectl rollout restart deployment/pairdrop -n pairdrop-space
 
 ## Cluster Architecture
 
-```mermaid
-flowchart TD
-  subgraph sub_k3s["K3s Cluster"]
-    n_talos1["talos-ckf-wwf"]
-    n_talos2["talos-t9f-ihr"]
-    n_talos3["talos-326-d4w"]
-  end
-  
-  subgraph sub_storage["Longhorn Storage"]
-    n_replica1["Replica 1"]
-    n_replica2["Replica 2"]
-    n_replica3["Replica 3"]
-  end
-  
-  n_talos1 --> n_replica1
-  n_talos2 --> n_replica2
-  n_talos3 --> n_replica3
+### 3-Node K3s Cluster (Talos Linux)
+
 ```
+┌─────────────────────────────────────────────────────────┐
+│                    K3s Cluster                           │
+│                                                         │
+│  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐ │
+│  │ talos-ckf   │    │ talos-t9f   │    │ talos-326   │ │
+│  │ (Control)   │───▶│ (Worker)    │───▶│ (Worker)    │ │
+│  │             │    │             │    │             │ │
+│  │  Longhorn   │    │  Longhorn   │    │  Longhorn   │ │
+│  │  Replica 1  │    │  Replica 2  │    │  Replica 3  │ │
+│  └─────────────┘    └─────────────┘    └─────────────┘ │
+└─────────────────────────────────────────────────────────┘
+```
+
+### Storage: Longhorn (3 Replicas)
+
+Each PVC is replicated across all 3 nodes:
+- **Replica 1** → talos-ckf-wwf (control plane)
+- **Replica 2** → talos-t9f-ihr (worker, OpenClaw pinned)
+- **Replica 3** → talos-326-d4w (worker, general workloads)
+
+If any node fails, data survives and pods reschedule automatically.
 
 ---
 
