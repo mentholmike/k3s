@@ -1,0 +1,81 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: minecraft-space
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: minecraft-data-pv
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ""
+  hostPath:
+    path: /var/minecraft-data
+    type: DirectoryOrCreate
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: minecraft-pvc
+  namespace: minecraft-space
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: ""
+  volumeName: minecraft-data-pv
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minecraft-server
+  namespace: minecraft-space
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: minecraft-server
+  template:
+    metadata:
+      labels:
+        app: minecraft-server
+    spec:
+      containers:
+      - name: minecraft-server
+        image: itzg/minecraft-server:latest
+        ports:
+        - containerPort: 25565
+        volumeMounts:
+        - name: minecraft-data
+          mountPath: /data
+        env:  # Add this section to set the EULA acceptance
+          - name: EULA
+            value: "TRUE"
+      volumes:
+      - name: minecraft-data
+        persistentVolumeClaim:
+          claimName: minecraft-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: minecraft-service
+  namespace: minecraft-space
+spec:
+  type: NodePort #Exposes service on each Node's IP at a static port
+  selector:
+    app: minecraft-server #Matches the labels in your Deployment
+  ports:
+    - protocol: TCP
+      port: 25565          # The service's internal port
+      targetPort: 25565    # The container's port
+      nodePort: 30001      # Optional: Specify the NodePort (30000-32767). If omitted, Kubernetes will assign one

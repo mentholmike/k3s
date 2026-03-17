@@ -1,0 +1,5 @@
+title: Home Lab Kubernetes
+description: GitOps-managed K3s cluster showcase
+theme: jekyll-theme-cayman
+google_analytics:
+show_downloads: false

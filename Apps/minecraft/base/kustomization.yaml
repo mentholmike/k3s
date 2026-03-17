@@ -1,0 +1,3 @@
+#./apps/minecraft/base/kustomization.yaml
+resources:
+  - minecraft.yaml

@@ -1,0 +1,20 @@
+# Longhorn - Cloud-native distributed block storage
+# Install via Helm (not in Apps/ structure - system component)
+#
+# helm repo add longhorn https://charts.longhorn.io
+# helm install longhorn longhorn/longhorn --namespace longhorn-system --create-namespace
+#
+# For portfolio docs, see: docs/apps/longhorn.md
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: longhorn-example
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 10Gi
