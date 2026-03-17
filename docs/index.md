@@ -72,27 +72,32 @@ kubectl rollout restart deployment/pairdrop -n pairdrop-space
 ### 3-Node K3s Cluster (Talos Linux)
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│                    K3s Cluster                           │
-│                                                         │
-│  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐ │
-│  │   Control   │    │   Worker    │    │   Worker    │ │
-│  │   Node      │───▶│   Node      │───▶│   Node      │ │
-│  │             │    │             │    │             │ │
-│  │  Longhorn   │    │  Longhorn   │    │  Longhorn   │ │
-│  │  Replica 1  │    │  Replica 2  │    │  Replica 3  │ │
-│  └─────────────┘    └─────────────┘    └─────────────┘ │
-└─────────────────────────────────────────────────────────┘
+┌─────────────────┐         ┌─────────────────────────┐
+│  Control Plane  │         │     Worker Nodes        │
+│                 │         │                         │
+│  ┌───────────┐  │         │  ┌───────┐  ┌───────┐  │
+│  │   etcd    │  │         │  │Worker │  │Worker │  │
+│  │ API Server│  │         │  │ Node 1│  │ Node 2│  │
+│  │ Scheduler │  │         │  │       │  │       │  │
+│  └───────────┘  │         │  │Longhorn│  │Longhorn│  │
+│                 │         │  │Replica │  │Replica │  │
+│                 │         │  │   1    │  │   2    │  │
+│                 │         │  └───────┘  └───────┘  │
+└─────────────────┘         └─────────────────────────┘
+        │                              │
+        └─────────── Workloads ────────┘
+              (Pods scheduled on workers only)
 ```
 
-### Storage: Longhorn (3 Replicas)
+### Storage: Longhorn (2 Replicas on Workers)
 
-Each PVC is replicated across all 3 nodes:
-- **Replica 1** → Control node
-- **Replica 2** → Worker node 1
-- **Replica 3** → Worker node 2
+- **Control Plane** → Runs etcd, API server, scheduler (no workloads)
+- **Worker Node 1** → Runs workloads + Longhorn Replica 1
+- **Worker Node 2** → Runs workloads + Longhorn Replica 2
 
-If any node fails, data survives and pods reschedule automatically.
+Workloads are scheduled **only on worker nodes**. Control plane remains untouched for cluster stability.
+
+If a worker fails, pods reschedule to the remaining worker. Longhorn maintains replica count automatically.
 
 ---
 
