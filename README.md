@@ -89,7 +89,7 @@ flowchart TD
 ```
 Apps/
 ├── longhorn/       # Distributed block storage (3 replicas)
-├── windows/        # Windows 11 VM via KubeVirt
+├── windows/        # Windows 11 container using Dockur
 ├── pairdrop/       # Local file sharing (AirDrop alternative)
 └── minecraft/      # Minecraft server with persistent storage
 ```
