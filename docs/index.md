@@ -38,7 +38,7 @@ kubectl apply -k Apps/minecraft/base/
 
 ---
 
-## Cluster Architecture
+## Network Topology
 
 ```mermaid
 flowchart TD
@@ -93,23 +93,14 @@ flowchart TD
 
 ---
 
-## Lessons Learned
 
-### What Worked Well
-- **Longhorn** — Simple, reliable, built-in backup to S3
-- **Talos** — Minimal maintenance, no OS patching
-- **ArgoCD** — Visual sync status, easy rollback
-
-### What I'd Do Differently
-- Start with **vanilla K8s** before Talos (steeper learning curve)
-- Use **SealedSecrets** earlier (encrypt secrets in Git)
-- Implement **network policies** sooner (zero-trust networking)
 
 ---
 
 ## Contact
 
 **Repo:** [github.com/mentholmike/k3s](https://github.com/mentholmike/k3s)  
-**Domain:** [k3s.wagmilabs.fun](https://k3s.wagmilabs.fun)
+**Domain:** [k3s.wagmilabs.fun](https://k3s.wagmilabs.fun)  
+**LinkedIn:** [Michael Wyatt](https://www.linkedin.com/in/michael-wyatt-526918125)
 
 *This is a personal home lab — not for production use without review.*

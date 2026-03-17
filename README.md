@@ -11,7 +11,7 @@ This repository contains Kubernetes manifests for self-hosted applications runni
 
 ---
 
-## Cluster Architecture
+## Network Topology
 
 ```mermaid
 flowchart TD
