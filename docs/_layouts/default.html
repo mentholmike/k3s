@@ -47,10 +47,10 @@
 
         <!-- TOOLBAR -->
         <div class="win-toolbar">
-          <button class="win-toolbar-btn" onclick="history.back()" title="Back">
+          <button class="win-toolbar-btn" id="btn-back" onclick="siteNav(-1)" title="Back">
             <span>◀</span> Back
           </button>
-          <button class="win-toolbar-btn" onclick="history.forward()" title="Forward">
+          <button class="win-toolbar-btn" id="btn-forward" onclick="siteNav(1)" title="Forward">
             Forward <span>▶</span>
           </button>
           <div class="win-toolbar-sep"></div>
@@ -140,10 +140,10 @@
 
       <!-- TASKBAR -->
       <div class="taskbar">
-        <button class="start-btn">
+        <a class="start-btn" href="https://wagmilabs.fun" target="_blank" rel="noopener">
           <span class="start-logo">⊞</span>
           <span>Start</span>
-        </button>
+        </a>
         <div class="taskbar-divider"></div>
         <div class="taskbar-window-btn active">
           <span>🖥️</span>
@@ -179,6 +179,28 @@
       }
       updateClock();
       setInterval(updateClock, 30000);
+
+      // Back / Forward — navigate within site pages only
+      var sitePages = ['/', '/apps/longhorn', '/apps/windows', '/apps/pairdrop', '/apps/minecraft'];
+      var currentPath = window.location.pathname.replace(/\/$/, '') || '/';
+      var currentIdx = sitePages.indexOf(currentPath);
+      if (currentIdx === -1) currentIdx = 0;
+
+      function siteNav(dir) {
+        var next = currentIdx + dir;
+        if (next >= 0 && next < sitePages.length) {
+          window.location.href = sitePages[next];
+        }
+      }
+
+      // Dim unavailable buttons
+      function updateNavBtns() {
+        var back = document.getElementById('btn-back');
+        var fwd  = document.getElementById('btn-forward');
+        if (back)  back.style.opacity  = currentIdx <= 0 ? '0.4' : '1';
+        if (fwd)   fwd.style.opacity   = currentIdx >= sitePages.length - 1 ? '0.4' : '1';
+      }
+      updateNavBtns();
     </script>
 
   </body>

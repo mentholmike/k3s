@@ -36,7 +36,7 @@
   /* Font */
   --font: "MS Sans Serif", "Microsoft Sans Serif", "Arial", Tahoma, sans-serif;
   --font-mono: "Courier New", "Lucida Console", monospace;
-  --font-size: 13px;
+  --font-size: 15px;
 }
 
 html, body { height: 100%; }
@@ -414,14 +414,14 @@ body {
 }
 
 .win-content h1 {
-  font-size: 18px;
+  font-size: 21px;
   padding-bottom: 4px;
   border-bottom: 2px solid var(--win-dark);
   margin-top: 0;
 }
 
 .win-content h2 {
-  font-size: 15px;
+  font-size: 17px;
   background: #000080;
   color: #ffffff;
   padding: 3px 8px;
@@ -429,16 +429,16 @@ body {
 }
 
 .win-content h3 {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: bold;
   border-left: 3px solid #000080;
   padding-left: 6px;
 }
 
-.win-content h4 { font-size: 13px; font-weight: bold; }
+.win-content h4 { font-size: 15px; font-weight: bold; }
 
 .win-content p {
-  font-size: 13px;
+  font-size: 15px;
   color: var(--text);
   margin: 0 0 0.75em;
   line-height: 1.6;
@@ -459,7 +459,7 @@ body {
 /* ── Code ─────────────────────────────────────────────────────── */
 .win-content code {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
   background: #000000;
   color: #00ff00;
   padding: 1px 4px;
@@ -474,7 +474,7 @@ body {
   overflow-x: auto;
   margin: 8px 0 12px;
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
   color: #00ff00;
   line-height: 1.5;
 }
@@ -503,7 +503,7 @@ body {
 .win-content table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 12px;
+  font-size: 14px;
   margin: 8px 0 12px;
   border: 1px solid var(--win-dark);
 }
@@ -515,7 +515,7 @@ body {
   text-align: left;
   font-weight: bold;
   border: 1px solid #000080;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .win-content tbody td {
@@ -538,7 +538,7 @@ body {
 .win-content ul, .win-content ol {
   padding-left: 20px;
   margin: 4px 0 10px;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .win-content li { margin: 2px 0; line-height: 1.5; }
@@ -635,6 +635,8 @@ body {
 
 /* Start button */
 .start-btn {
+  text-decoration: none;
+  color: var(--text);
   display: flex;
   align-items: center;
   gap: 4px;
