@@ -1,7 +1,5 @@
 title: Home Lab K3s
 description: GitOps-managed K3s cluster portfolio
-theme: jekyll-theme-hacker
-google_analytics:
 show_downloads: false
 markdown: kramdown
 highlighter: rouge
@@ -13,7 +11,3 @@ kramdown:
       line_numbers: false
     block:
       line_numbers: false
-      start_line: 1
-
-# Custom CSS for dark theme (jekyllrb.com style)
-# See: docs/assets/css/style.scss

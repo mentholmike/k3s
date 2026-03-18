@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if page.title %}{{ page.title }} — {% endif %}{{ site.title }}</title>
+    <meta name="description" content="{{ page.description | default: site.description }}">
+    <link rel="stylesheet" href="{{ '/assets/css/win95.css' | relative_url }}">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🖥️</text></svg>">
+  </head>
+  <body>
+
+    <!-- DESKTOP -->
+    <div class="desktop">
+
+      <!-- MAIN WINDOW -->
+      <div class="win-window" id="main-window">
+
+        <!-- TITLE BAR -->
+        <div class="win-titlebar">
+          <div class="win-titlebar-left">
+            <span class="win-titlebar-icon">🖥️</span>
+            <span class="win-titlebar-text">
+              Home Lab K3s{% if page.title and page.title != "Home Lab Kubernetes" %} — {{ page.title }}{% endif %}
+            </span>
+          </div>
+          <div class="win-titlebar-btns">
+            <button class="win-ctrl-btn win-minimize" title="Minimize">_</button>
+            <button class="win-ctrl-btn win-maximize" title="Maximize">□</button>
+            <button class="win-ctrl-btn win-close" title="Close">✕</button>
+          </div>
+        </div>
+
+        <!-- MENU BAR -->
+        <div class="win-menubar">
+          <span class="win-menu-item">File</span>
+          <span class="win-menu-item">View</span>
+          <span class="win-menu-item">
+            <a href="https://github.com/mentholmike/k3s" target="_blank" rel="noopener">GitHub</a>
+          </span>
+          <span class="win-menu-item">
+            <a href="https://www.linkedin.com/in/michael-wyatt-526918125" target="_blank" rel="noopener">LinkedIn</a>
+          </span>
+          <span class="win-menu-item win-menu-help">Help</span>
+        </div>
+
+        <!-- TOOLBAR -->
+        <div class="win-toolbar">
+          <button class="win-toolbar-btn" onclick="history.back()" title="Back">
+            <span>◀</span> Back
+          </button>
+          <button class="win-toolbar-btn" onclick="history.forward()" title="Forward">
+            Forward <span>▶</span>
+          </button>
+          <div class="win-toolbar-sep"></div>
+          <button class="win-toolbar-btn" onclick="window.location.href='/'" title="Home">
+            🏠 Home
+          </button>
+          <div class="win-toolbar-sep"></div>
+          <div class="win-address-bar">
+            <label class="win-address-label">Address</label>
+            <div class="win-address-input">
+              <span>📁 </span>
+              <span>k3s.wagmilabs.fun{% if page.url != '/' %}{{ page.url }}{% endif %}</span>
+            </div>
+            <button class="win-address-go">Go</button>
+          </div>
+        </div>
+
+        <!-- BODY: SIDEBAR + MAIN -->
+        <div class="win-body">
+
+          <!-- EXPLORER SIDEBAR -->
+          <div class="win-sidebar">
+            <div class="win-sidebar-header">Folders</div>
+            <div class="win-tree">
+              <div class="win-tree-item win-tree-root {% if page.url == '/' %}win-tree-active{% endif %}">
+                <a href="/">
+                  <span class="tree-icon">🖥️</span>
+                  <span>Home Lab K3s</span>
+                </a>
+              </div>
+              <div class="win-tree-group">
+                <div class="win-tree-header">
+                  <span class="tree-icon">📂</span> Apps
+                </div>
+                <div class="win-tree-children">
+                  <div class="win-tree-item {% if page.url contains 'longhorn' %}win-tree-active{% endif %}">
+                    <a href="{{ '/apps/longhorn' | relative_url }}">
+                      <span class="tree-icon">💾</span> Longhorn
+                    </a>
+                  </div>
+                  <div class="win-tree-item {% if page.url contains 'windows' %}win-tree-active{% endif %}">
+                    <a href="{{ '/apps/windows' | relative_url }}">
+                      <span class="tree-icon">🪟</span> Windows VM
+                    </a>
+                  </div>
+                  <div class="win-tree-item {% if page.url contains 'pairdrop' %}win-tree-active{% endif %}">
+                    <a href="{{ '/apps/pairdrop' | relative_url }}">
+                      <span class="tree-icon">🔗</span> PairDrop
+                    </a>
+                  </div>
+                  <div class="win-tree-item {% if page.url contains 'minecraft' %}win-tree-active{% endif %}">
+                    <a href="{{ '/apps/minecraft' | relative_url }}">
+                      <span class="tree-icon">⛏️</span> Minecraft
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="win-sidebar-details">
+              <div class="win-detail-box">
+                <strong>{{ page.title | default: "Home" }}</strong>
+                <hr class="win-hr-flat">
+                <p>K3s GitOps cluster<br>Talos Linux · ArgoCD</p>
+                <p><a href="https://github.com/mentholmike/k3s" target="_blank" rel="noopener">View Repo →</a></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- MAIN CONTENT PANE -->
+          <div class="win-main">
+            <div class="win-content">
+              {{ content }}
+            </div>
+          </div>
+
+        </div><!-- end win-body -->
+
+        <!-- STATUS BAR -->
+        <div class="win-statusbar">
+          <span class="win-status-left">Ready</span>
+          <span class="win-status-mid">k3s.wagmilabs.fun</span>
+          <span class="win-status-right" id="win-status-time"></span>
+        </div>
+
+      </div><!-- end win-window -->
+
+      <!-- TASKBAR -->
+      <div class="taskbar">
+        <button class="start-btn">
+          <span class="start-logo">⊞</span>
+          <span>Start</span>
+        </button>
+        <div class="taskbar-divider"></div>
+        <div class="taskbar-window-btn active">
+          <span>🖥️</span>
+          <span>Home Lab K3s</span>
+        </div>
+        <div class="taskbar-tray">
+          <span class="tray-icon" title="GitHub">
+            <a href="https://github.com/mentholmike/k3s" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">gh</a>
+          </span>
+          <div class="tray-divider"></div>
+          <span class="tray-clock" id="taskbar-clock">12:00 AM</span>
+        </div>
+      </div>
+
+    </div><!-- end desktop -->
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+      mermaid.initialize({ startOnLoad: true, theme: 'default' });
+
+      // Live clock
+      function updateClock() {
+        var now = new Date();
+        var h = now.getHours(), m = now.getMinutes();
+        var ampm = h >= 12 ? 'PM' : 'AM';
+        h = h % 12 || 12;
+        var time = h + ':' + (m < 10 ? '0' : '') + m + ' ' + ampm;
+        var el1 = document.getElementById('taskbar-clock');
+        var el2 = document.getElementById('win-status-time');
+        if (el1) el1.textContent = time;
+        if (el2) el2.textContent = time;
+      }
+      updateClock();
+      setInterval(updateClock, 30000);
+    </script>
+
+  </body>
+</html>
